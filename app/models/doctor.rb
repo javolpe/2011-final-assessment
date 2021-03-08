@@ -6,4 +6,8 @@ class Doctor < ApplicationRecord
     Doctor.select("doctors.*")
     .order(years_practiced: :desc)
   end
+
+  def self.find_by_name(name)
+    Doctor.where("name = ?", name).first
+  end
 end

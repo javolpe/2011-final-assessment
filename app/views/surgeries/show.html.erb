@@ -28,3 +28,13 @@
     <p><%= "Name: #{@surgery.least_experienced_doc.name}" %></p>
     <p><%= "Years Experience: #{@surgery.least_experienced_doc.years_practiced}" %></p>
   </section>
+
+<br>
+<h2>Add Doctor to Surgery by name</h2>
+<section id="add-doctor">
+  <%= form_with url: surgery_doctor_surgeries_path(@surgery), method: :post, local: true do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.submit "Submit" %>
+  <% end %>
+</section>

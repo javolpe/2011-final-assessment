@@ -4,6 +4,7 @@ RSpec.describe 'Surgery Show Page' do
   before :each do 
     @doc1 = Doctor.create!(name: "James Holden", years_practiced: 7, university: "Wyoming" )
     @doc2 = Doctor.create!(name: "Prax Meng", years_practiced: 23, university: "Ganymede" )
+    @doc3 = Doctor.create!(name: "Elvi Okoye", years_practiced: 16, university: "Ilus" )
 
     @surg1 = Surgery.create!(title: "Backeotomy", day_of_the_week: "Monday", operating_room_number: 13)
 
@@ -29,6 +30,8 @@ RSpec.describe 'Surgery Show Page' do
 
       expect(page).to have_content("Name: #{@doc2.name}")
       expect(page).to have_content("Years Experience: #{@doc2.years_practiced}")
+
+      expect(page).not_to have_content("Name: #{@doc3.name}")
     end
   end
 
@@ -41,6 +44,26 @@ RSpec.describe 'Surgery Show Page' do
     within("#least-experienced") do 
       expect(page).to have_content("Name: #{@doc1.name}")
       expect(page).to have_content("Years Experience: #{@doc1.years_practiced}")
+    end
+  end
+
+  it "can add a doctor a surgery" do 
+    within("#add-doctor") do 
+      fill_in "name", with: "#{@doc3.name}"
+
+      click_on "Submit"
+    end
+    expect(current_path).to eq(surgery_path(@surg1))
+
+    within("#all-doctors") do 
+      expect(page).to have_content("Name: #{@doc1.name}")
+      expect(page).to have_content("Years Experience: #{@doc1.years_practiced}")
+
+      expect(page).to have_content("Name: #{@doc2.name}")
+      expect(page).to have_content("Years Experience: #{@doc2.years_practiced}")
+
+      expect(page).to have_content("Name: #{@doc3.name}")
+      expect(page).to have_content("Years Experience: #{@doc3.years_practiced}")
     end
   end
 end

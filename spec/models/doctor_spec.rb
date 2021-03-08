@@ -18,5 +18,13 @@ RSpec.describe Doctor, type: :model do
       expect(@doctors.second.id).to eq(@doc3.id)
       expect(@doctors.third.id).to eq(@doc1.id)
     end
+
+    it "can find a doctor by name" do 
+      @doc1 = Doctor.create!(name: "James Holden", years_practiced: 7, university: "Wyoming" )
+
+      doc = Doctor.find_by_name(@doc1.name)
+
+      expect(doc.id).to eq(@doc1.id)
+    end
   end
 end
