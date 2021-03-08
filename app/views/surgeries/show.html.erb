@@ -1,0 +1,30 @@
+<h1>Surgery Show Page</h1>
+<br>
+<h2>Surgery Info</h2>
+<section id="surgery-info">
+  <p><%= "Title: #{@surgery.title}" %></p>
+  <p><%= "Day of Week: #{@surgery.day_of_the_week}" %></p>
+  <p><%= "Room Number: #{@surgery.operating_room_number}" %></p>
+</section>
+<br>
+<h2>All Doctors</h2>
+<section id="all-doctors">
+<% @surgery.doctors.each do |doc|%>
+  <p><%= "Name: #{doc.name} " %></p>
+  <p><%= "Years Experience: #{doc.years_practiced} "%></p><br>
+<% end %>
+</section>
+<br>
+
+<h2>Most Experienced Doctor</h2>
+  <section id="most-experienced">
+    <p><%= "Name: #{@surgery.most_experienced_doc.name}" %></p>
+    <p><%= "Years Experience: #{@surgery.most_experienced_doc.years_practiced}" %></p>
+  </section>
+
+<br>
+<h2>Least Experienced Doctor</h2>
+  <section id="least-experienced">
+    <p><%= "Name: #{@surgery.least_experienced_doc.name}" %></p>
+    <p><%= "Years Experience: #{@surgery.least_experienced_doc.years_practiced}" %></p>
+  </section>
